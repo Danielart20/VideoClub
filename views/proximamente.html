@@ -1,0 +1,34 @@
+<div ng-controller="peliculaController">
+    <div ng-include="'./views/pelicula.html'"></div>
+</div>
+
+    <nav class="navbar navbar-default color-fondo">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand center" href="#"><img src="img/Logo.png" alt="Logo"></a>
+            </div>
+            <ul class="nav navbar-nav m-right">
+                <li><a href="#!/" ng-click="getAllPopular()">Descubrir</a></li>
+                <li><a href="#!/coming">Próximamente</a></li>
+                <li><a href="#!/favourites">Mis Favoritas</a></li>
+                <li><a href="#!/later">Para más tarde</a></li>
+                <li><a href="#!/saw">Vistas</a></li>
+                <li><a><img src="img/search_icon.png" ng-click="filmSearch(search)" class="search" alt="Buscar"><input type="text" class="encontrarPelicula" id="buscar" placeholder="Encuentra tu película favorita" ng-model="search.title"></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="contenedor_upComing animated bounceInLeft">
+    <div ng-repeat="film in upComings.results | filter:search track by film.id">
+        <a ng-click="show(film)">
+            <div class="hover">
+                <div class="mini_hover">
+                    <span class="img_val roscas"></span>{{film.vote_average}}
+
+                    <!--  <img src="../img/corason.png" alt="favorite" width="23" height="20" ng-click="addFavorite(img)" -->
+                </div>
+            </div>
+        </a>
+        <img class="portada_img" ng-src="https://image.tmdb.org/t/p/w500{{film.poster_path}}" width="259" height="391" alt="Layer">
+    </div>
+    </div>
+

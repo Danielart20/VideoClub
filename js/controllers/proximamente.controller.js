@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -8,14 +8,14 @@
     proximamenteController.$inject = ['$scope', 'filmFactory'];
 
     /* @ngInject */
-    function proximamenteController($scope, filmFactory){
+    function proximamenteController($scope, filmFactory) {
 
         $scope.upComings = [];
         $scope.show = show;
         $scope.film = [];
         $scope.omdb = [];
         $scope.similarFilms = [];
-        
+
 
         activate();
 
@@ -25,22 +25,24 @@
             $(".active_li").click(function () {
                 alert("Handler for .click() called.");
             });
-            
+
             filmFactory.upComing().then(up);
         }
-        
-        function up(response){
+
+        function up(response) {
             console.log(response);
             $scope.upComings = response;
         }
-        
-         function show(img) {
+
+        function show(img) {
             document.getElementById("peli").style.display = "unset";
+            document.getElementsByTagName("body")[0].style.overflow = "hidden";
+            document.getElementById("contenido").style.overflow = "scroll";
             filmFactory.filmDetails(img.id).then(data);
             filmFactory.similarFilms(img.id).then(similar);
 
         }
-        
+
         function similar(response) {
             $scope.similarFilms = [];
             for (var i = 0; i < 4; i++) {

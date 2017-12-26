@@ -20,6 +20,8 @@
             similarFilms: similarFilms,
             omdbCall: omdbCall
         };
+        
+        //Popularidad, año, ingresos, por titulo, votación media, votación, 
 
 
         return exports;
@@ -34,11 +36,12 @@
             return $http.get(base_url + 'search/movie?api_key=' + api_key + '&language=es-ES&query=' + q + '&page=1&include_adult=false').then(data);
         }
 
-        function films(page, yearMax, yearMin, gen, voteMax, voteMin) {
+        function films(page, yearMax, yearMin, gen, voteMax, voteMin, sortBy) {
             if(gen === undefined){
                 gen = "";
             }
-            return $http.get(base_url +'discover/movie?api_key='+api_key+'&language=es-ES&sort_by=popularity.desc&page='+page+'&primary_release_date.gte=' + yearMin + '-12-30&primary_release_date.lte=' + yearMax + '-01-01&with_genres='+gen+'&vote_average.gte='+voteMin+'&vote_average.lte='+voteMax).then(data);
+            
+            return $http.get(base_url +'discover/movie?api_key='+api_key+'&language=es-ES&sort_by='+sortBy+'&page='+page+'&primary_release_date.gte=' + yearMin + '-12-30&primary_release_date.lte=' + yearMax + '-12-30&with_genres='+gen+'&vote_average.gte='+voteMin+'&vote_average.lte='+voteMax).then(data);
             
         }
 

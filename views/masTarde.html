@@ -1,21 +1,7 @@
 <div ng-controller="peliculaController">
     <div ng-include="'./views/pelicula.html'"></div>
 </div>
-    <nav class="navbar navbar-default color-fondo">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand center" href="#"><img src="img/Logo.png" alt="Logo"></a>
-            </div>
-            <ul class="nav navbar-nav m-right">
-                <li><a href="#!/" ng-click="getAllPopular()">Descubrir</a></li>
-                <li><a href="#!/coming">Próximamente</a></li>
-                <li><a href="#!/favourites">Mis Favoritas</a></li>
-                <li><a href="#!/later">Para más tarde</a></li>
-                <li><a href="#!/saw">Vistas</a></li>
-                <li><a><img src="img/search_icon.png" ng-click="filmSearch(search)" class="search" alt="Buscar"><input type="text" class="encontrarPelicula" id="buscar" placeholder="Encuentra tu película favorita" ng-model="search.title"></a></li>
-            </ul>
-        </div>
-    </nav>
+
     <div class="animated bounceInDown">
         <span ng-show="filmsLater.length == 0"><h2>No tienes peliculas pendientes para más tarde</h2></span>
         <div class="img_fav">

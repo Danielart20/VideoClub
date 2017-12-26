@@ -3,86 +3,72 @@
 </div>
 
 <div id="video">
-<nav class="navbar navbar-default color-fondo">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand center" href="#"><img src="img/Logo.png" alt="Logo"></a>
-        </div>
-        <ul class="nav navbar-nav m-right">
-            <li><a ng-click="init()" id="discover">Descubrir</a></li>
-            <li><a href="#!/coming" id="upComing">Próximamente</a></li>
-            <li><a href="#!/favourites" id="favorite">Mis Favoritas</a></li>
-            <li><a href="#!/later" id="later">Para más tarde</a></li>
-            <li><a href="#!/saw" id="saw">Vistas</a></li>
-            <li><a><img src="img/search_icon.png" class="search" alt="Buscar"><input type="text" class="encontrarPelicula" id="buscar" placeholder="Encuentra tu película favorita" ng-model="search"></a></li>
-        </ul>
-    </div>
-    <!-- <a href="#!/login">Iniciar Sesión</a>  -->
-</nav>
 
-<nav class="navbar navbar-default" id="filter_nav">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#" ng-click="showFilter()"><img src="img/icono.png" alt="icono"></a>
-        </div>
-        <ul class="nav navbar-nav m-right2">
-            <li><a>Filtrar</a></li>
-            <li><a ng-click="removeFilter()" style="color:#f3644f;">Borrar</a></li>
-            <li><a>{{films.total_results}} películas encontradas</a></li>
-            <li class="position">
-                <select ng-model="order" class="selectpicker">
-                     <option value="" selected>Ordenar por..</option>
-                      <option value="-popularity">Más popular</option>
-                      <option value="popularity">Menos popular</option>
-                      <option value="-release_date">Mas reciente</option>
-                      <option value="release_date">Menos reciente</option>
-                    </select>
-
-            </li>
-        </ul>
-    </div>
-
-</nav>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 left_panel" id="filter">
-            <div class="w3-sidebar w3-bar-block">
-
-                <p>Año</p>
-                <rzslider class="custom-slider" rz-slider-model="sliderYear.minValue" rz-slider-high="sliderYear.maxValue" rz-slider-options="sliderYear.options">
-                </rzslider>
-
-                <p>Valoración TheMovieDB</p>
-                <rzslider class="custom-slider" rz-slider-model="sliderVote.minValue" rz-slider-high="sliderVote.maxValue" rz-slider-options="sliderVote.options">
-                </rzslider>
-
+    <nav class="navbar navbar-default" id="filter_nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand"><img src="img/icono.png" alt="icono"></a>
             </div>
-            <div class="generos">
-                <p>Géneros</p>
-                <div class="contenedor_generos">
-                    <div ng-repeat="genre in filmsGen">
-                        <a ng-click="actualGenreId(genre.id);getAllPopular()">{{genre.name}}</a>
+            <ul class="nav navbar-nav m-right2">
+                <li ng-click="hideFilter()"><a>Filtrar</a></li>
+                <li><a ng-click="removeFilter()" style="color:#f3644f;">Borrar</a></li>
+                <li><a>{{films.total_results}} películas encontradas</a></li>
+                <li class="position">
+                    <select ng-model="order" ng-change="sort_by(order)" class="form-control">
+                      <option value="popularity.desc" selected>Más popular</option>
+                      <option value="popularity.asc">Menos popular</option>
+                      <option value="primary_release_date.desc">Mas reciente</option>
+                      <option value="primary_release_date.asc">Menos reciente</option>
+                       <option value="original_title.asc">Título A-Z</option>
+                       <option value="original_title.desc">Título Z-A</option>
+                       <option value="vote_average.asc">Votación 0-10</option>
+                      <option value="vote_average.desc">Votación 10-0</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row"> 
+            <div class="col-md-3 left_panel" id="filter">
+                <div class="w3-sidebar w3-bar-block" id="range_filter">
+
+                    <p>Año</p>
+                    <rzslider class="custom-slider" rz-slider-model="sliderYear.minValue" rz-slider-high="sliderYear.maxValue" rz-slider-options="sliderYear.options">
+                    </rzslider>
+
+                    <p>Valoración TheMovieDB</p>
+                    <rzslider class="custom-slider" rz-slider-model="sliderVote.minValue" rz-slider-high="sliderVote.maxValue" rz-slider-options="sliderVote.options">
+                    </rzslider>
+
+                </div>
+                <div class="generos">
+                    <p>Géneros</p>
+                    <div class="contenedor_generos">
+                        <div ng-repeat="genre in filmsGen">
+                            <a ng-click="actualGenreId(genre);getAllPopular()" class="boton_gen">{{genre.name}}</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9 imagenes">
-            <!-- PELICULAS PRINCIPAL ---------------------------------------------------------------------------BEGIN---->
-            <div ng-cloack ng-repeat="img in films.results | orderBy:order track by img.id">
-                <a ng-click="show(img)">
-                    <div class="hover">
-                        <div class="mini_hover">
-                            <span class="img_val roscas"></span>{{img.vote_average}}
+            <h2 ng-if="gen != ''">Género: {{gen.name}}</h2>
+            <div class="col-md-9 imagenes">
+                <!-- PELICULAS PRINCIPAL ---------------------------------------------------------------------------BEGIN---->
+                <div ng-cloack ng-repeat="img in films.results | orderBy:order track by img.id">
+                    <a ng-click="show(img)">
+                        <div class="hover">
+                            <div class="mini_hover">
+                                <span class="img_val roscas"></span>{{img.vote_average}}
 
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <img class="portada_img" ng-src="https://image.tmdb.org/t/p/w500{{img.poster_path}}" width="259" height="391" alt="Layer">
+                    </a>
+                    <img class="portada_img no_photo" ng-src="https://image.tmdb.org/t/p/w500{{img.poster_path}}" width="259" height="391">
+                </div>
             </div>
-        </div>
-        <!-- PELICULAS PRINCIPAL ---------------------------------------------------------------------------END---->
+            <!-- PELICULAS PRINCIPAL ---------------------------------------------------------------------------END---->
 
+        </div>
     </div>
-</div>
 </div>

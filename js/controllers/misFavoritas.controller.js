@@ -24,8 +24,8 @@
         ////////////////
 
         function activate() {
-           
-            
+
+
             if ("FilmsFav" in localStorage) {
                 $scope.filmsFav = JSON.parse(localStorage.getItem("FilmsFav"));
             } else {
@@ -47,14 +47,16 @@
             }
 
         }
-        
-         function show(img) {
+
+        function show(img) {
             document.getElementById("peli").style.display = "unset";
+            document.getElementsByTagName("body")[0].style.overflow = "hidden";
+            document.getElementById("contenido").style.overflow = "scroll";
             filmFactory.filmDetails(img.id).then(data);
             filmFactory.similarFilms(img.id).then(similar);
 
         }
-        
+
         function similar(response) {
             $scope.similarFilms = [];
             for (var i = 0; i < 4; i++) {

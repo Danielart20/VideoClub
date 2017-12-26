@@ -1,56 +1,61 @@
 <div id="peli">
-  <div class="div_transparente"></div>
-   <div class="div_contenido animated fadeIn">
-    <a href="#!/" ng-click="close()"><img src="../img/x.png" alt="salir" class="x"></a>
-    <div class="container-fluid">
-        <h1>{{film.title}} <span class="tamaño_letra">{{omdb.Year}}</span></h1>
-        <hr>
-        <div class="row">
-            <div class="col-md-5">
-                <div class="imagen_peli"><img ng-src="https://image.tmdb.org/t/p/w500{{film.poster_path}}" alt="Layer" width="440" height="660"></div>
-                <p><b>Subs: </b>en es pb</p>
-            </div>
-            <div class="col-md-7">
-                <div class="info_peli">
-                    <h2>Sinopsis <span class="config"><a ng-click="addFavorites(film)">Favorito</a><a ng-click="addLate(film)">Ver más tarde</a><a ng-click="addSaw(film)">Vista</a></span><span class="alinear tamaño_letra2 tamaño_letra">{{omdb.Runtime}}</span></h2>
-                    
-                    <div class="features">
-                        <div class="features1">
-
-                            <a ng-repeat="gene in film.genres" href="#" class="tipo_peli">{{gene.name}}</a>
-
+    <div class="row">
+            <div class="div_transparente"></div>
+        <div class="col-md-offset-1 col-md-10">
+            <div class="div_contenido animated fadeIn " id="contenido">
+                <a ng-click="close()"><img src="./img/x.png" alt="salir" class="x"></a>
+                <div class="container-fluid peli_font">
+                    <h1>{{film.title}} <span class="tamaño_letra">{{omdb.Year}}</span></h1>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="imagen_peli"><img ng-src="https://image.tmdb.org/t/p/w500{{film.poster_path}}" alt="Layer" width="440" height="660"></div><br>
+                            <p><b>Subs: </b>en es pb</p>
                         </div>
-                        <div class="features2">
+                        <div class="col-md-7">
+                            <div class="info_peli">
+                                <h2>Sinopsis <span class="config"><a class="fav" ng-click="addFavorites(film)">Favorito</a><a ng-click="addLate(film)" id="later">Ver más tarde</a><a  id="saw" ng-click="addSaw(film)">Vista</a></span><span class="alinear tamaño_letra2 tamaño_letra">{{omdb.Runtime}}</span></h2>
 
-                            <span ng-repeat="valor in omdb.Ratings" class="val">{{valor.Value}}<span class="img_val" ng-class="{'mancha_verde' : $index==0, 'tomatoe' : $index==1, 'roscas' : $index==2 }"></span></span>
+                                <div class="features">
+                                    <div class="features1">
+
+                                        <a ng-repeat="gene in film.genres" href="#" class="tipo_peli">{{gene.name}}</a>
+
+                                    </div>
+                                    <div class="features2">
+
+                                        <span ng-repeat="valor in omdb.Ratings" class="val">{{valor.Value}}<span class="img_val" ng-class="{'mancha_verde' : $index==0, 'tomatoe' : $index==1, 'roscas' : $index==2 }"></span></span>
+                                    </div>
+                                </div>
+                                <p>{{film.overview}}</p>
+
+
+                                <div class="trailer">
+                                    <h2>Tráiler</h2>
+                                    <div ng-repeat="trailer in film.videos">
+                                        <iframe class="youtube-player" type="text/html" width="640" height="385" ng-src="{{trustSrc('https://www.youtube.com/embed/'+trailer[0].key)}}" allowfullscreen frameborder="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <p>{{film.overview}}</p>
+                    <hr>
+                    <div class="relacionado">
+                        <p>Peliculas Similares</p>
+                        <div class="row relacionado_flex">
+                            <div ng-repeat="similar in similarFilms track by similar.id">
+                                <a ng-click="init(similar)">
+                                    <div class="col-md-3"><img ng-src="https://image.tmdb.org/t/p/w185/{{similar.poster_path}}" alt="Layer"></div>
+                                </a>
+                            </div>
 
-
-                    <div class="trailer">
-                        <h2>Tráiler</h2>
-                        <div ng-repeat="trailer in film.videos">
-                            <iframe class="youtube-player" type="text/html" width="640" height="385" ng-src="{{trustSrc('https://www.youtube.com/embed/'+trailer[0].key)}}" allowfullscreen frameborder="0"></iframe>
                         </div>
+
                     </div>
+                    <div class="alert-message"></div>
+
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="relacionado">
-            <p>Peliculas Similares</p>
-            <div class="row relacionado_flex">
-                <div ng-repeat="similar in similarFilms track by similar.id">
-                    <a ng-click="init(similar)">
-                        <div class="col-md-3"><img ng-src="https://image.tmdb.org/t/p/w185/{{similar.poster_path}}" alt="Layer"></div>
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
-</div>
 </div>

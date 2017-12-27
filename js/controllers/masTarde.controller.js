@@ -49,6 +49,7 @@
             document.getElementById("peli").style.display = "unset";
             document.getElementsByTagName("body")[0].style.overflow = "hidden";
             document.getElementById("contenido").style.overflow = "scroll";
+            document.getElementsByClassName("config")[0].style.display = "none";
             filmFactory.filmDetails(img.id).then(data);
             filmFactory.similarFilms(img.id).then(similar);
 

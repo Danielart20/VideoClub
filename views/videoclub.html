@@ -47,7 +47,7 @@
                     <p>Géneros</p>
                     <div class="contenedor_generos">
                         <div ng-repeat="genre in filmsGen">
-                            <a ng-click="actualGenreId(genre);getAllPopular()" class="boton_gen">{{genre.name}}</a>
+                            <a ng-click="actualGenreId(genre);getAllPopular()" class="boton_gen" title="{{genre.name}}">{{genre.name}}</a>
                         </div>
                     </div>
                 </div>

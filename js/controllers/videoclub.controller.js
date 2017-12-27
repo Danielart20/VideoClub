@@ -73,6 +73,14 @@
         function activate() {
 
             $(document).ready(function () {
+                $(".center").bind("click", function () {
+                    $(".selected").css("border", "none");
+                    $(".selected").css("color", "#777");
+                    $("#discover").css("border-bottom", "4px solid red");
+                    $("#discover").css("color", "white");
+                    
+                });
+
                 $(".selected").bind("click", function () {
                     $(".selected").css("border", "none");
                     $(".selected").css("color", "#777");
@@ -115,7 +123,7 @@
             $(window).scroll(function () {
                 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                     $scope.page++;
-                    filmFactory.films($scope.page, $scope.sliderYear.maxValue, $scope.sliderYear.minValue, $scope.gen, $scope.voteMaximus, $scope.voteMinimun, $scope.sortBy).then(nextFilms);
+                    filmFactory.films($scope.page, $scope.sliderYear.maxValue, $scope.sliderYear.minValue, $scope.gen, $scope.sliderVote.maxValue,$scope.sliderVote.minValue, $scope.sortBy).then(nextFilms);
 
                 }
             });
@@ -128,7 +136,7 @@
 
 
         function getAllPopular() {
-            filmFactory.films(1, $scope.sliderYear.maxValue, $scope.sliderYear.minValue, $scope.gen.id, $scope.sliderVote.maxValue , $scope.sliderVote.minValue, $scope.sortBy).then(pelis);
+            filmFactory.films(1, $scope.sliderYear.maxValue, $scope.sliderYear.minValue, $scope.gen.id, $scope.sliderVote.maxValue, $scope.sliderVote.minValue, $scope.sortBy).then(pelis);
         }
 
 
@@ -145,7 +153,7 @@
             $scope.sliderYear.maxValue = 2017;
             $scope.sliderYear.minValue = 1979;
 
-            $scope.sliderVote.maxValue = 100;
+            $scope.sliderVote.maxValue = 10;
             $scope.sliderVote.minValue = 0;
             $scope.order = "popularity.desc";
             $scope.sortBy = "popularity.desc";
@@ -157,7 +165,7 @@
             $scope.sliderYear.maxValue = 2017;
             $scope.sliderYear.minValue = 1979;
 
-            $scope.sliderVote.maxValue = 100;
+            $scope.sliderVote.maxValue = 10;
             $scope.sliderVote.minValue = 0;
             $("#range_filter").toggle();
             getAllPopular();
@@ -225,7 +233,7 @@
             $scope.sliderYear.maxValue = 2017;
             $scope.sliderYear.minValue = 1979;
 
-            $scope.sliderVote.maxValue = 100;
+            $scope.sliderVote.maxValue = 10;
             $scope.sliderVote.minValue = 0;
             getAllPopular();
         }

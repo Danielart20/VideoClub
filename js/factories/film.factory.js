@@ -46,7 +46,7 @@
         }
 
         function filmDetails(id) {
-            return $http.get(base_url + 'movie/' + id + '?api_key=' + api_key + '&language=en-EN&append_to_response=videos').then(data);
+            return $http.get(base_url + 'movie/' + id + '?api_key=' + api_key + '&language=es-ES&append_to_response=videos').then(data);
         }
 
         function similarFilms(id) {
